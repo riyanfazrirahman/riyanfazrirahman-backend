@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/repos",
+      "dest": "/api/repos.js"
+    }
+  ]
+}
