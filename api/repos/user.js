@@ -44,6 +44,7 @@ export default async function handler(req, res) {
         created_at: repo.created_at,
         updated_at: repo.updated_at,
         owner: repo.owner?.login || "unknown",
+        avatar_url: repo.owner?.avatar_url,
       }));
 
     res.status(200).json(publicRepos);
