@@ -1,5 +1,7 @@
 import Cors from "cors";
 import fetch from "node-fetch";
+import { formatDate } from "./../../src/utils/formatDate.js";
+import { getRelativeTime } from "./../../src/utils/relativeTime.js";
 
 // Setup middleware untuk CORS
 function runMiddleware(req, res, fn) {
@@ -50,13 +52,15 @@ export default async function handler(req, res) {
     const enrichedRepos = await Promise.all(
       repos.map(async (repo) => {
         const languages = await getRepoLanguages(repo.languages_url, headers);
+        const createdAt = getRelativeTime(repo.created_at);
+        const updatedAt = formatDate(repo.updated_at);
 
         return {
           name: repo.name,
           html_url: repo.html_url,
           homepage: repo.homepage,
-          created_at: repo.created_at,
-          updated_at: repo.updated_at,
+          created_at: createdAt,
+          updated_at: updatedAt,
           owner: repo.owner.login,
           avatar_url: repo.owner.avatar_url,
           languages,
@@ -76,6 +80,7 @@ export default async function handler(req, res) {
   }
 }
 
+// Api language repo
 async function getRepoLanguages(languagesUrl, headers) {
   try {
     const langRes = await fetch(languagesUrl, { headers });
