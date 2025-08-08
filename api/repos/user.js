@@ -1,21 +1,37 @@
-import cors from 'cors';
-import fetch from "node-fetch";
+import Cors from 'cors';
+import fetch from 'node-fetch';
 
-app.use(cors({
-  origin: ['http://localhost:5500', 'https://riyanfazrirahman.github.io']
-}));
+// Setup middleware untuk CORS
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) return reject(result);
+      return resolve(result);
+    });
+  });
+}
+
+// CORS config
+const cors = Cors({
+  methods: ['GET', 'HEAD'],
+  origin: ['http://localhost:5500', 'https://riyanfazrirahman.github.io'],
+});
 
 export default async function handler(req, res) {
+  await runMiddleware(req, res, cors);
+
   const headers = {
     Authorization: `token ${process.env.GITHUB_TOKEN}`,
     "User-Agent": "repo-proxy",
   };
 
-  const username = process.env.GITHUB_USERNAME;
+  const username = process.env.GITHUB_USER;
 
   try {
-    const response = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`, { headers  });
-    
+    const response = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`, {
+      headers,
+    });
+
     const repos = await response.json();
 
     const publicRepos = repos
