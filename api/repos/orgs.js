@@ -1,4 +1,9 @@
+import cors from 'cors';
 import fetch from "node-fetch";
+
+app.use(cors({
+  origin: ['http://localhost:5500', 'https://riyanfazrirahman.github.io']
+}));
 
 export default async function handler(req, res) {
   const headers = {
