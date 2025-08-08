@@ -1,9 +1,7 @@
 {
   "version": 2,
   "routes": [
-    {
-      "src": "/api/repos",
-      "dest": "/api/repos.js"
-    }
+    { "src": "/repos/user", "dest": "/api/repos/user.js" },
+    { "src": "/repos/org", "dest": "/api/repos/org.js" }
   ]
 }
