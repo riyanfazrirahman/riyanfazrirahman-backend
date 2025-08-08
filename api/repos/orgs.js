@@ -40,7 +40,7 @@ export default async function handler(req, res) {
         name: repo.name,
         html_url: repo.html_url,
         language: repo.language,
-        homepage: repo.has_pages ? `https://${repo.owner.login}.github.io/${repo.name}` : null,
+        homepage: repo.homepage,
         created_at: repo.created_at,
         updated_at: repo.updated_at,
         owner: repo.owner?.login || "unknown",
