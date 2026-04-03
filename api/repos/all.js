@@ -19,7 +19,7 @@ const cors = Cors({
   origin: [
     process.env.LOCAL_HOST,
     process.env.GITHUB_PAGE,
-    process.env.DOMAIN
+    process.env.DOMAIN_PAGE
   ],
 });
 
