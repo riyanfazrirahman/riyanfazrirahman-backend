@@ -27,7 +27,8 @@ export default async function handler(req, res) {
   await runMiddleware(req, res, cors);
 
   const headers = {
-    Authorization: `token ${process.env.GITHUB_TOKEN}`,
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    Accept: "application/vnd.github+json",
     "User-Agent": "repo-proxy",
   };
 
@@ -44,6 +45,14 @@ export default async function handler(req, res) {
         headers,
       }),
     ]);
+
+    if (!orgRes.ok) {
+      throw new Error(`Org API error: ${await orgRes.text()}`);
+    }
+
+    if (!userRes.ok) {
+      throw new Error(`User API error: ${await userRes.text()}`);
+    }
 
     const [orgRepos, userRepos] = await Promise.all([
       orgRes.json(),
