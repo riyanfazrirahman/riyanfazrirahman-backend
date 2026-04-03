@@ -2,9 +2,9 @@
   "name": "riyanfazrirahman-backend",
   "version": "1.0.0",
   "type": "module",
-  "main": "api/repos.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node api/repos.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
