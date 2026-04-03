@@ -16,7 +16,11 @@ function runMiddleware(req, res, fn) {
 // CORS config
 const cors = Cors({
   methods: ["GET", "HEAD"],
-  origin: ["http://localhost:5500", "https://riyanfazrirahman.github.io"],
+  origin: [
+    process.env.LOCAL_HOST,
+    process.env.GITHUB_PAGE,
+    process.env.DOMAIN
+  ],
 });
 
 export default async function handler(req, res) {
