@@ -10,5 +10,5 @@ const PORT = process.env.PORT || 3000;
 app.get("/api/repos/all", allReposHandler);
 
 app.listen(PORT, () => {
-    console.log(`Server jalan di http://localhost:${PORT}`);
+    console.log(`Server jalan di http://localhost:${PORT}/api/repos/all`);
 });

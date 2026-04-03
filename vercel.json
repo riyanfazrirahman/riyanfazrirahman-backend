@@ -1,7 +1,4 @@
 {
   "version": 2,
-  "routes": [
-    { "src": "/repos/user", "dest": "/api/repos/user.js" },
-    { "src": "/repos/org", "dest": "/api/repos/org.js" }
-  ]
+  "routes": [{ "src": "/repos/all", "dest": "/api/repos/all.js" }]
 }
